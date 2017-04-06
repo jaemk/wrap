@@ -1,0 +1,9 @@
+[package]
+name = "wrap"
+description = "Generic wrapping"
+version = "0.0.1"
+license = "MIT"
+authors = ["James Kominick <james.kominick@gmail.com>"]
+
+[dev-dependencies]
+lazy_static = "0.2"
