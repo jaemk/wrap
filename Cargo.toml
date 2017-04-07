@@ -1,9 +1,17 @@
 [package]
 name = "wrap"
-description = "Generic wrapping"
 version = "0.0.1"
 license = "MIT"
 authors = ["James Kominick <james.kominick@gmail.com>"]
+description = "Generic function wrapping"
+repository = "https://github.com/jaemk/wrap"
+documentation = "https://docs.rs/wrap"
+readme = "README.md"
+categories = ["rust-patterns"]
+keywords = ["wrap", "function", "macros", "wrapping"]
+
+[badges]
+travis-ci = { repository = "jaemk/wrap", branch = "master" }
 
 [dev-dependencies]
 lazy_static = "0.2"
