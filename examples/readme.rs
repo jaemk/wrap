@@ -1,13 +1,3 @@
-# wrap
-
-> generalized rust wrapping macro
-
-Macros for defining generalized `wrappers` and applying them to arbitrary functions. See `examples`.
-
-## Simple Usage
-
-
-```rust,ignore
 #[macro_use] extern crate wrap;
 
 
@@ -46,5 +36,3 @@ fn greet_logged(name: &str) -> String = {
 pub fn main() {
     println!("{}", greet_logged("james"));
 }
-```
-
