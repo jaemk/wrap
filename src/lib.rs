@@ -1,3 +1,51 @@
+/*!
+Macros for defining function `wrappers` and `wrapped` functions.
+
+
+# Usage:
+
+`wrap` provides two macros, `def_wrapper!` and `wrap_with!`.
+`def_wrapper!` lets you define `before` and `after` actions to wrap any given function.
+`wrappers` can then be applied to arbitrary functions using `wrap_with!` which takes a `wrapper` name and
+function definition and expands to a wrapped form.
+
+`before` blocks can be used to evaluate the wrapped function's arguments, create and pass on contextual info to the wrapped function,
+and short-circuit to return before evaluation of the wrapped function. `before` blocks' access to the wrapped function arguments
+is limited to a tuple of references, `(&arg1, &arg2, ...)`. `before` blocks cannot own or mutate function arguments as that would
+require cloning all arguments and defining `wrap_with!` functions to take `mut` arguments.
+
+`after` blocks can be used to mutate the wrapped function's result and can access the `before` block's value. `after` blocks cannot
+access the wrapped function's arguments as the wrapped function is expected to consume them.
+
+See examples for more complex wrappers.
+
+
+```rust
+#[macro_use] extern crate wrap;
+
+
+def_wrapper!{log_wrap =
+    before = (fn_args) >> {
+        println!("* [log] >> before everything! fn_args: {:?}", fn_args);
+    };
+    after  = (wrapped_result) >> {
+        println!("* [log] >> after everything! wrapped_result: {:?}", wrapped_result);
+    };
+}
+
+
+wrap_with!{log_wrap >>
+fn greet(name: &str) -> String = {
+    format!("Hello, {}!", name)
+}}
+
+
+pub fn main() {
+    greet("bean");
+}
+```
+
+*/
 
 #[macro_export]
 macro_rules! def_wrapper {
