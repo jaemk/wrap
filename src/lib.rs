@@ -3,6 +3,17 @@
 macro_rules! def_wrapper {
     ($name:ident = before = ($fn_args:ident) >> $before:expr ; after = ($wrapped_res:ident) >> $after:expr;) => {
         macro_rules! $name {
+            (_ : _; $args:expr => $wrapped_body_ret:ty = $wrapped_body:expr) => {
+                {
+                    let mut _before  = {
+                        let $fn_args = $args;
+                        $before
+                    };
+                    let mut $wrapped_res: $wrapped_body_ret = (|| $wrapped_body)();
+                    let _ = $after;
+                    $wrapped_res
+                }
+            };
             ($before_block_res:ident : $before_block_ty:ty ; $args:expr => $wrapped_body_ret:ty = $wrapped_body:expr) => {
                 {
 
@@ -50,7 +61,7 @@ macro_rules! wrap_with {
     ($wrapper:ident >> fn $name:ident ($($arg:ident : $argtype:ty),*) -> $ret:ty = $body:expr) => {
         #[allow(unused_mut, unused_parens)]
         pub fn $name($($arg : $argtype),*) -> $ret {
-            $wrapper!( _before_block_res : () ;  ($(&$arg),*) => $ret = $body)
+            $wrapper!( _ : _ ; ($(&$arg),*) => $ret = $body)
         }
     };
     ($wrapper:ident -> $before_block_res:ident : $before_block_ty:ty; >> fn $name:ident ($($arg:ident : $argtype:ty),*) -> $ret:ty = $body:expr) => {

@@ -81,9 +81,10 @@ fn get_key_spooky(key: &str) -> Option<String> = {
 }}
 
 
-/// Wrap get-spooky with a logging wrapper. Note, that
-/// the wrapper ident and return type can be excluded when the
-/// wrapper's `before` expression provides `()`
+/// Wrap get-spooky with a logging wrapper.
+/// Note, that the wrapper provided value ident and type
+/// can be excluded if you don't want/need access to them
+/// inside of your function
 wrap_with!{log >>
 fn get_key_spooky_logged(key: &str) -> Option<String> = {
     get_key_spooky(key)
