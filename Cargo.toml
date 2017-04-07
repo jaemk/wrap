@@ -1,6 +1,6 @@
 [package]
 name = "wrap"
-version = "0.0.1"
+version = "0.1.0"
 license = "MIT"
 authors = ["James Kominick <james.kominick@gmail.com>"]
 description = "Generic function wrapping"
