@@ -1,8 +1,8 @@
-# wrap
+# wrap [![Build Status](https://travis-ci.org/jaemk/wrap.svg?branch=master)](https://travis-ci.org/jaemk/wrap) [![crates.io](https://img.shields.io/crates/v/wrap.svg)](https://crates.io/crates/wrap) [![docs](https://docs.rs/wrap/badge.svg)](https://docs.rs/wrap)
 
 > generalized rust wrapping macro
 
-Macros for defining generalized `wrappers` and applying them to arbitrary functions. See `examples`.
+Macros for defining generalized `wrappers` and applying them to arbitrary functions. See `examples` for more advanced `wrappers`.
 
 ## Simple Usage
 
